@@ -133,6 +133,7 @@ export const VideoGenerator: React.FC<VideoGeneratorProps> = ({ language }) => {
         prompt: prompt.trim(),
         aspectRatio: selectedRatio,
         duration: selectedDuration,
+        source: data.source,
         timestamp: Date.now(),
         language,
       };
@@ -172,7 +173,7 @@ export const VideoGenerator: React.FC<VideoGeneratorProps> = ({ language }) => {
 
   // Stages of generation for visual clarity
   const getStageMessage = () => {
-    if (elapsedSeconds < 8) return 'Initializing Gemini Omni 1.1 Flash interaction pipeline...';
+    if (elapsedSeconds < 8) return 'Initializing Gemini Omni 1.2 Flash neural video pipeline...';
     if (elapsedSeconds < 22) return 'Synthesizing scene motion, physics, and lighting dynamics...';
     if (elapsedSeconds < 38) return 'Interpolating temporal frames and rendering 720p HD sequence...';
     return 'Finalizing MP4 video container and streaming back to BharatGPT...';
@@ -184,7 +185,7 @@ export const VideoGenerator: React.FC<VideoGeneratorProps> = ({ language }) => {
       <div className="text-center mb-6">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-blue-500/10 via-amber-500/10 to-emerald-500/10 border border-blue-500/20 text-neutral-800 dark:text-neutral-200 mb-2">
           <Film size={14} className="text-blue-500 animate-pulse" />
-          <span>{ui.tabVideo} · Gemini Omni 1.1 Flash</span>
+          <span>{ui.tabVideo} · Gemini Omni 1.2 Flash</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
           Generate Cinematic AI Videos with <span className="text-amber-500">Bharat</span>

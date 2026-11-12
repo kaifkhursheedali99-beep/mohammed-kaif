@@ -141,6 +141,7 @@ export const ImageGenerator: React.FC<ImageGeneratorProps> = ({ language }) => {
         imageUrl: data.imageUrl,
         prompt: prompt.trim(),
         aspectRatio: selectedRatio,
+        source: data.source,
         timestamp: Date.now(),
         language,
       };

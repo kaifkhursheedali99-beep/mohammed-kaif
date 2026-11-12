@@ -41,6 +41,7 @@ export interface GeneratedImage {
   imageUrl: string;
   timestamp: number;
   language?: SupportedLanguage;
+  source?: string;
 }
 
 export interface GeneratedVideo {
@@ -51,6 +52,7 @@ export interface GeneratedVideo {
   videoUrl: string;
   timestamp: number;
   language?: SupportedLanguage;
+  source?: string;
 }
 
 export interface ModelComparisonResult {

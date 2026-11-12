@@ -11,6 +11,13 @@ interface ChatInputProps {
   onLanguageChange: (lang: SupportedLanguage) => void;
 }
 
+const SUGGESTION_CHIPS = [
+  { label: '📝 Summarize Text', prompt: 'Summarize the following text into key bullet points:' },
+  { label: '📚 Help with Homework', prompt: 'Help me understand and solve this homework question step-by-step:' },
+  { label: '💻 Write Code', prompt: 'Write clean, modern, well-explained code for:' },
+  { label: '🌐 Translate to Kannada', prompt: 'Translate the following into natural, polite Kannada (ಕನ್ನಡ):' },
+];
+
 export const ChatInput: React.FC<ChatInputProps> = ({
   onSendMessage,
   onStopStreaming,
@@ -25,6 +32,23 @@ export const ChatInput: React.FC<ChatInputProps> = ({
   const recognitionRef = useRef<any>(null);
   const langConfig = LANGUAGES[language];
   const ui = UI_STRINGS[language] || UI_STRINGS.en;
+
+  const handleChipClick = (chipPrompt: string) => {
+    if (isStreaming) return;
+    const trimmed = input.trim();
+    if (trimmed) {
+      onSendMessage(`${chipPrompt} ${trimmed}`);
+      setInput('');
+    } else {
+      setInput(`${chipPrompt} `);
+      setTimeout(() => {
+        if (textareaRef.current) {
+          textareaRef.current.focus();
+          textareaRef.current.setSelectionRange(chipPrompt.length + 1, chipPrompt.length + 1);
+        }
+      }, 30);
+    }
+  };
 
   // Auto-resize textarea height
   useEffect(() => {
@@ -109,6 +133,22 @@ export const ChatInput: React.FC<ChatInputProps> = ({
 
   return (
     <div className="w-full max-w-3xl mx-auto px-3 sm:px-4 pb-3 sm:pb-5">
+      {/* Suggestion Action Chips */}
+      <div className="flex items-center gap-1.5 sm:gap-2 mb-2 overflow-x-auto pb-1 no-scrollbar scroll-smooth">
+        {SUGGESTION_CHIPS.map((chip, idx) => (
+          <button
+            key={idx}
+            type="button"
+            onClick={() => handleChipClick(chip.prompt)}
+            disabled={isStreaming}
+            className="shrink-0 px-3 py-1.5 rounded-full text-xs font-medium bg-neutral-100/90 dark:bg-[#151a26] hover:bg-amber-500/10 dark:hover:bg-amber-500/15 text-neutral-700 dark:text-neutral-300 hover:text-amber-600 dark:hover:text-amber-400 border border-neutral-200/90 dark:border-neutral-700/80 hover:border-amber-500/40 transition-all cursor-pointer shadow-2xs active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed"
+            title={`Click to populate: ${chip.prompt}`}
+          >
+            {chip.label}
+          </button>
+        ))}
+      </div>
+
       <div className="relative rounded-2xl sm:rounded-3xl border border-neutral-300/80 dark:border-neutral-700/80 bg-white dark:bg-[#141923] shadow-md focus-within:ring-2 focus-within:ring-amber-500/30 focus-within:border-amber-500 transition-all p-2 sm:p-2.5">
         {/* Tricolour hairline top accent inside input card */}
         <div className="absolute top-0 left-6 right-6 h-[2px] rounded-full overflow-hidden opacity-40 dark:opacity-60">
