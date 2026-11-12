@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-hindi: 'Noto Sans Devanagari', 'Plus Jakarta Sans', sans-serif;
+    --font-kannada: 'Noto Sans Kannada', 'Plus Jakarta Sans', sans-serif;
+    --font-urdu: 'Noto Nastaliq Urdu', 'Noto Sans Arabic', system-ui, sans-serif;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html[lang="hi"] {
+    font-family: var(--font-hindi);
+  }
+
+  html[lang="kn"] {
+    font-family: var(--font-kannada);
+  }
+
+  html[lang="ur"] {
+    font-family: var(--font-urdu);
+  }
+}
+
+/* Custom scrollbar for modern chat interface */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(75, 85, 99, 0.4);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(75, 85, 99, 0.6);
+}
+
+/* Elegant subtle tricolour gradient bar and accents */
+.tricolour-gradient {
+  background: linear-gradient(90deg, #FF9933 0%, #FFFFFF 50%, #138808 100%);
+}
+
+.tricolour-border {
+  border-image: linear-gradient(90deg, #FF9933, #000080 50%, #138808) 1;
+}
+
+.tricolour-glow {
+  box-shadow: 0 0 25px -5px rgba(255, 153, 51, 0.25), 0 0 25px -5px rgba(19, 136, 8, 0.25);
+}

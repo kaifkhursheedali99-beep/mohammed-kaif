@@ -1,0 +1,8 @@
+{
+  "name": "BharatGPT",
+  "description": "Intelligent Indian AI assistant with multilingual fluency in Hindi, English, Urdu, and Kannada, featuring real Gemini AI chat and tricolour design.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
